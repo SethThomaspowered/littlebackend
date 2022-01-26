@@ -13,7 +13,15 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private String emailAddress;
 
+    public MyUserDetails(User user) {
+    }
 
+    public MyUserDetails(User user, String userName, String password, String emailAddress) {
+        this.user = user;
+        this.userName = userName;
+        this.password = password;
+        this.emailAddress = emailAddress;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
