@@ -34,8 +34,20 @@ public class BookController {
 
     //     http://localhost:9092/api/books/1
     @GetMapping(path = "/books/{bookId}")
-    public Optional<Book> getBook(@PathVariable Long bookId) {
+    public Book getBook(@PathVariable Long bookId) {
         LOGGER.info("calling getBook method from controller");
         return bookService.getBook(bookId);
+    }
+    //      http://localhost:9092/api/books/1
+    @PutMapping(path = "/books/{bookId}")
+    public Book updateBook(@PathVariable(value = "bookId") Long bookId, @RequestBody Book bookObject){
+        LOGGER.info("calling updateBook method from controller");
+        return bookService.updateBook(bookId, bookObject);
+    }
+    //      http://localhost:9092/api/books/1
+    @DeleteMapping(path = "/books/{bookId}")
+    public String deleteBook(@PathVariable(value = "bookId") Long bookId){
+        LOGGER.info("calling deleteBook method from controller");
+        return bookService.deleteBook(bookId);
     }
 }
