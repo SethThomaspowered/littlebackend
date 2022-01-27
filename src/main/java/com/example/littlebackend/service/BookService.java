@@ -39,13 +39,35 @@ public class BookService {
             return books;
         }
     }
-    public Optional<Book> getBook(Long bookId) {
+    public Book getBook(Long bookId) {
 
-        Optional<Book> book = bookRepository.findById(bookId);
+        Book book = bookRepository.findBookById(bookId);
         if (book == null) {
             throw new InformationNotFoundException("Book with id " + bookId + " not found");
         } else{
             return book;
+        }
+    }
+    public Book updateBook(Long bookId, Book bookObject) {
+        LOGGER.info("service calling updateBook ==>");
+        Book book = bookRepository.findBookById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else {
+            book.setBookTitle(bookObject.getBookTitle());
+            book.setDateAdded(bookObject.getDateAdded());
+            book.setGoogleBooksId(bookObject.getGoogleBooksId());
+            return bookRepository.save(book);
+        }
+    }
+    public String deleteBook(Long bookId) {
+        LOGGER.info("service calling deleteBook ==>");
+        Book book = bookRepository.findBookById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else {
+            bookRepository.deleteById(bookId);
+            return "Book with id " + bookId + " has been successfully deleted";
         }
     }
 }
