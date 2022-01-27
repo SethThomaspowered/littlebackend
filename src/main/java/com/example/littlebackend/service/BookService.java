@@ -48,4 +48,25 @@ public class BookService {
             return book;
         }
     }
+    public Optional<Book> updateBook(Long bookId, Book bookObject) {
+        LOGGER.info("service calling updateBook ==>");
+        Optional<Book> book = bookRepository.findById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else {
+            book.setDatedAdded(bookObject.getDateAdded());
+            book.setbookTitle(bookObject.getBookTitle());
+            return bookRepository.save(book);
+        }
+    }
+    public String deleteBook(Long bookId) {
+        LOGGER.info("service calling deletebook ==>");
+        Book book = bookRepository.findById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else {
+            bookRepository.deleteById(bookId);
+            return "Book with id " + bookId + " has been successfully deleted";
+        }
+    }
 }
