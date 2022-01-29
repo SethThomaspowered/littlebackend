@@ -54,9 +54,12 @@ public class BookService {
         if (book == null) {
             throw new InformationNotFoundException("Book with id " + bookId + " not found");
         } else {
-            book.setBookTitle(bookObject.getBookTitle());
-            book.setDateAdded(bookObject.getDateAdded());
-            book.setGoogleBooksId(bookObject.getGoogleBooksId());
+            if(bookObject.getBookTitle() != null){ book.setBookTitle(bookObject.getBookTitle());}
+            if(bookObject.getDateAdded() != null) {
+                book.setDateAdded(bookObject.getDateAdded());
+            }
+            if(bookObject.getGoogleBooksId() != null){
+                book.setGoogleBooksId(bookObject.getGoogleBooksId());}
             return bookRepository.save(book);
         }
     }
