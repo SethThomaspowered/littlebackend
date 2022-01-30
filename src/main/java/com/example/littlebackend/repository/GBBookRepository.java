@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GBBookRepository extends JpaRepository<GBBook, Long> {
     GBBook findGBBookByTitle(String title);
-    List<GBBook> findByBookId(Long bookId);
+    GBBook findGBBookById(Long GBBookId);
 }

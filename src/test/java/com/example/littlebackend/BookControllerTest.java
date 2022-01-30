@@ -27,38 +27,38 @@ public class BookControllerTest extends AbstractTest{
         Book[] BookList= super.mapFromJson(content, Book[].class);
         assertTrue(BookList.length>0);
     }
-    @Test
-    public void addBook() throws Exception {
-        String uri = "/books";
-        Book book = new Book();
-
-        book.setBookTitle("Ginger");
-        book.setAuthorName("Robert Patterson");
-
-        String inputJson = super.mapToJson(book);
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(201, status);
-        String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "Book is added successfully");
-    }
-    @Test
-    public void updateBook() throws Exception {
-        String uri = "/api/books/2";
-        Book book = new Book();
-        book.setBookTitle("Lemon");
-
-        String inputJson = super.mapToJson(book);
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
-                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-        int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
-        String content = mvcResult.getResponse().getContentAsString();
-        assertEquals(content, "Book is updated successfully");
-    }
+//    @Test
+//    public void addBook() throws Exception {
+//        String uri = "/books";
+//        Book book = new Book();
+//
+//        book.setBookTitle("Ginger");
+//        book.setAuthorName("Robert Patterson");
+//
+//        String inputJson = super.mapToJson(book);
+//        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+//
+//        int status = mvcResult.getResponse().getStatus();
+//        assertEquals(201, status);
+//        String content = mvcResult.getResponse().getContentAsString();
+//        assertEquals(content, "Book is added successfully");
+//    }
+//    @Test
+//    public void updateBook() throws Exception {
+//        String uri = "/api/books/2";
+//        Book book = new Book();
+//        book.setBookTitle("Lemon");
+//
+//        String inputJson = super.mapToJson(book);
+//        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+//
+//        int status = mvcResult.getResponse().getStatus();
+//        assertEquals(200, status);
+//        String content = mvcResult.getResponse().getContentAsString();
+//        assertEquals(content, "Book is updated successfully");
+//    }
     @Test
     public void deleteBook() throws Exception {
         String uri = "/api/books/2";

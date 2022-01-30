@@ -79,73 +79,57 @@ public class BookService {
             return "Book with id " + bookId + " has been successfully deleted";
         }
     }
-    public GBBook addGBBook(Long bookId, GBBook gBBookObject) {
+    public GBBook addGBBook(GBBook gBBookObject) {
         System.out.println("service calling addGBBook ==>");
-        Book book = bookRepository.findBookById(bookId);
-        if (book == null) {
-            throw new InformationNotFoundException(
-                    "Book with id " + bookId + " does not exist");
-        }
         GBBook gBBook = gBBookRepository.findGBBookByTitle(gBBookObject.getTitle());
         if (gBBook != null) {
-            throw new InformationExistsException("Music with title " + gBBook.getTitle() + " already exists");
+            throw new InformationExistsException("Book with title " + gBBook.getTitle() + " already exists");
         }
-        gBBookObject.setBook(book);
+
         return gBBookRepository.save(gBBookObject);
     }
 
-//    public List<GBBook> getGBBookList(Long bookId){
-//        LOGGER.info("calling getGBBBookList method from service");
-//        Optional<Book> book = bookRepository.findById(bookId);
-//        if (book.isPresent()) {
-//            return book.get().getGBBook();
-//        } else {
-//            throw new InformationNotFoundException("Playlist with id " + playlistId + " not found");
-//        }
-//    }
-    public GBBook getGBBook(Long bookId, Long gBBookId) {
-        LOGGER.info("calling getGBBook method from service");
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (book.isPresent()) {
-            Optional<GBBook> gBBook = gBBookRepository.findByBookId(bookId).stream().filter(
-                    p -> p.getId().equals(gBBookId)).findFirst();
-            if (gBBook == null) {
-                throw new InformationNotFoundException("Book with " + gBBookId + " not found");
-            } else return gBBook.get();
-        } else {
-            throw new InformationNotFoundException("No book with id " + bookId + " not found");
+    public List<GBBook> getGBBookList(){
+        LOGGER.info("calling getGBBBookList method from service");
+       List<GBBook> gbBooks = gBBookRepository.findAll();
+        if(gbBooks.isEmpty()){
+            throw new InformationNotFoundException("No books were found");
+        } else{
+            return gbBooks;
         }
     }
-//
-//    public Music updatePlaylistMusic(Long playlistId, Long musicId, Music musicObject) {
-//        LOGGER.info("service calling updatePlaylistMusic ==>");
-//        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-//        Playlist playlist = playlistRepository.findByIdAndUserId(playlistId, userDetails.getUser().getId());
-//        try {
-//            Music music = (musicRepository.findByPlaylistId(
-//                    playlistId).stream().filter(p -> p.getId().equals(musicId)).findFirst()).get();
-//            music.setTitle(musicObject.getTitle());
-//            music.setLength(musicObject.getLength());
-//            music.setReleaseDate(musicObject.getReleaseDate());
-//            music.setArtist(musicObject.getArtist());
-//            return musicRepository.save(music);
-//        } catch (NoSuchElementException e) {
-//            throw new InformationNotFoundException("music track or playlist not found");
+    public GBBook getGBBook(Long bookId) {
+
+        GBBook book = gBBookRepository.findGBBookById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else{
+            return book;
+        }
+    }
+//    public GBBook updateGBBook(Long bookId, GBBook bookObject) {
+//        LOGGER.info("service calling updateBook ==>");
+//        GBBook book = gBBookRepository.findGBBookById(bookId);
+//        if (book == null) {
+//            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+//        } else {
+//            if(bookObject.getTitle() != null){ book.setTitle(bookObject.getTitle());}
+//            if(bookObject.getDateAdded() != null) {
+//                book.setDateAdded(bookObject.getDateAdded());
+//            }
+//            if(bookObject.getGoogleId() != null){
+//                book.setGoogleBooksId(bookObject.getGoogleBooksId());}
+//            return gBBookRepository.save(gBBook);
 //        }
 //    }
-//
-//    public Music deletePlaylistMusic(Long playlistId, Long musicId) {
-//        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-//        Playlist playlist = playlistRepository.findByIdAndUserId(playlistId, userDetails.getUser().getId());
-//        try {
-//            Music music = (musicRepository.findByPlaylistId(
-//                    playlistId).stream().filter(p -> p.getId().equals(musicId)).findFirst()).get();
-//            musicRepository.deleteById(music.getId());
-//        } catch (NoSuchElementException e) {
-//            throw new InformationNotFoundException("music track or playlist not found");
-//        }
-//        return null;
-//    }
+    public String deleteGBBook(Long gBBookId) {
+        LOGGER.info("service calling deleteGBBook ==>");
+        GBBook gBBook = gBBookRepository.findGBBookById(gBBookId);
+        if (gBBook == null) {
+            throw new InformationNotFoundException("Book with id " + gBBookId + " not found");
+        } else {
+            bookRepository.deleteById(gBBookId);
+            return "Book with id " + gBBookId + " has been successfully deleted";
+        }
+    }
 }

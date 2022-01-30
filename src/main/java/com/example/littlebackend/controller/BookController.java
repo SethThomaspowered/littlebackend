@@ -53,19 +53,19 @@ public class BookController {
         return bookService.deleteBook(bookId);
     }
     // http://localhost:9092/api/books/1/gbbooks
-    @PostMapping(path = "/books/{bookId}/gbbooks")
-    public GBBook addGBBook(@PathVariable(value = "bookId") Long bookId, @RequestBody GBBook gBBookObject) {
+    @PostMapping(path = "/gbbooks")
+    public GBBook addGBBook(@RequestBody GBBook gBBookObject) {
         LOGGER.info("calling addGBBook method from controller");
-        return bookService.addGBBook(bookId, gBBookObject);
+        return bookService.addGBBook(gBBookObject);
     }
 
 
-    //     http://localhost:9092/api/books/{bookid}/gbbooks/{gbbookId}
-    @GetMapping(path = "/books/{bookId}/gbbooks/{gbbookId}")
-    public GBBook getGBBook(@PathVariable Long bookId, @PathVariable Long gBBookId) {
-        LOGGER.info("calling getBook method from controller");
-        return bookService.getGBBook(bookId, gBBookId);
-    }
+    //     http://localhost:9092/api/gbbooks/{gbbookId}
+//    @GetMapping(path = "/gbbooks/{gbbookId}")
+//    public GBBook getGBBook(@PathVariable Long gBBookId) {
+//        LOGGER.info("calling getGBBBook method from controller");
+//        return bookService.getGBBook(gBBookId);
+//    }
 //    //      http://localhost:9092/api/books/1/gbbooks/{gbbookId}
 //    @PutMapping(path = "/books/{bookId}/gbbooks/{gBBookId}")
 //    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,

@@ -24,19 +24,19 @@ public class Book {
     @Column
     private String googleBooksId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="googleBook_id", referencedColumnName = "id")
-    private GBBook gBBook;
-    public Book() {
-    }
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="googleBook_id", referencedColumnName = "id")
+//    private GBBook gBBook;
+//    public Book() {
+//    }
 
-    public GBBook getgBBook() {
-        return gBBook;
-    }
-
-    public void setgBBook(GBBook gBBook) {
-        this.gBBook = gBBook;
-    }
+//    public GBBook getgBBook() {
+//        return gBBook;
+//    }
+//
+//    public void setgBBook(GBBook gBBook) {
+//        this.gBBook = gBBook;
+//    }
 
     public Book(Long id, String bookTitle, String authorName, String googleBooksId, Date dateAdded) {
         this.id = id;
@@ -45,6 +45,9 @@ public class Book {
         this.dateAdded = dateAdded;
         this.IsAvailable = true;
         this.googleBooksId = googleBooksId;
+    }
+
+    public Book() {
     }
 
     public Long getId() {
