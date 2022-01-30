@@ -1,6 +1,7 @@
 package com.example.littlebackend.controller;
 
 import com.example.littlebackend.model.Book;
+import com.example.littlebackend.model.GBBook;
 import com.example.littlebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,4 +52,26 @@ public class BookController {
         LOGGER.info("calling deleteBook method from controller");
         return bookService.deleteBook(bookId);
     }
+    // http://localhost:9092/api/books/1/gbbooks
+    @PostMapping(path = "/books/{bookId}/gbbooks")
+    public GBBook addGBBook(@PathVariable(value = "bookId") Long bookId, @RequestBody GBBook gBBookObject) {
+        LOGGER.info("calling addGBBook method from controller");
+        return bookService.addGBBook(bookId, gBBookObject);
+    }
+
+
+    //     http://localhost:9092/api/books/{bookid}/gbbooks/{gbbookId}
+    @GetMapping(path = "/books/{bookId}/gbbooks/{gbbookId}")
+    public GBBook getGBBook(@PathVariable Long bookId, @PathVariable Long gBBookId) {
+        LOGGER.info("calling getBook method from controller");
+        return bookService.getGBBook(bookId, gBBookId);
+    }
+//    //      http://localhost:9092/api/books/1/gbbooks/{gbbookId}
+//    @PutMapping(path = "/books/{bookId}/gbbooks/{gBBookId}")
+//    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,
+//                               @PathVariable(value = "gBBookId") Long gBBookId,
+//                               @RequestBody GBBook gBBookObject){
+//        LOGGER.info("calling updateGBBook method from controller");
+//        return bookService.updateGBBook(bookId, gBBookId, gBBookObject);
+//    }
 }

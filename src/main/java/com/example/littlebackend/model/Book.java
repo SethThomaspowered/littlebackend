@@ -2,6 +2,7 @@ package com.example.littlebackend.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -23,15 +24,26 @@ public class Book {
     @Column
     private String googleBooksId;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="googleBook_id", referencedColumnName = "id")
+    private GBBook gBBook;
     public Book() {
     }
 
-    public Book(Long id, String bookTitle, String authorName, Date dateAdded, boolean isAvailable, String googleBooksId) {
+    public GBBook getgBBook() {
+        return gBBook;
+    }
+
+    public void setgBBook(GBBook gBBook) {
+        this.gBBook = gBBook;
+    }
+
+    public Book(Long id, String bookTitle, String authorName, String googleBooksId, Date dateAdded) {
         this.id = id;
         this.bookTitle = bookTitle;
         this.authorName = authorName;
         this.dateAdded = dateAdded;
-        IsAvailable = isAvailable;
+        this.IsAvailable = true;
         this.googleBooksId = googleBooksId;
     }
 
@@ -82,4 +94,6 @@ public class Book {
     public void setGoogleBooksId(String googleBooksId) {
         this.googleBooksId = googleBooksId;
     }
+
+
 }
