@@ -78,4 +78,9 @@ public class BookController {
 //        LOGGER.info("calling updateGBBook method from controller");
 //        return bookService.updateGBBook(bookId, gBBookId, gBBookObject);
 //    }
+    @DeleteMapping(path = "/gbbooks/{gBBookId}")
+    public String deleteGBBook(@PathVariable(value = "gBBookId") Long gBBookId){
+        LOGGER.info("calling deleteGBBook method from controller");
+        return bookService.deleteGBBook(gBBookId);
+    }
 }
