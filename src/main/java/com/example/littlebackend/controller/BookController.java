@@ -59,7 +59,11 @@ public class BookController {
         return bookService.addGBBook(gBBookObject);
     }
 
-
+    @GetMapping(path = "/gbbooks")
+    public List<GBBook> getGBBooks(){
+        LOGGER.info("calling get Google Books from controller");
+        return bookService.getGBBookList();
+    }
     //     http://localhost:9092/api/gbbooks/{gbbookId}
 //    @GetMapping(path = "/gbbooks/{gbbookId}")
 //    public GBBook getGBBook(@PathVariable Long gBBookId) {
