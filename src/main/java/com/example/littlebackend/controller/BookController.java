@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path="/api/")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
 public class BookController {
     private BookService bookService;
     private static final Logger LOGGER = Logger.getLogger(BookController.class.getName());
