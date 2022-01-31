@@ -1,6 +1,7 @@
 package com.example.littlebackend.controller;
 
 import com.example.littlebackend.model.Book;
+import com.example.littlebackend.model.GBBook;
 import com.example.littlebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path="/api/")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
 public class BookController {
     private BookService bookService;
     private static final Logger LOGGER = Logger.getLogger(BookController.class.getName());
@@ -50,5 +51,36 @@ public class BookController {
     public String deleteBook(@PathVariable(value = "bookId") Long bookId){
         LOGGER.info("calling deleteBook method from controller");
         return bookService.deleteBook(bookId);
+    }
+    // http://localhost:9092/api/books/1/gbbooks
+    @PostMapping(path = "/gbbooks")
+    public GBBook addGBBook(@RequestBody GBBook gBBookObject) {
+        LOGGER.info("calling addGBBook method from controller");
+        return bookService.addGBBook(gBBookObject);
+    }
+
+    @GetMapping(path = "/gbbooks")
+    public List<GBBook> getGBBooks(){
+        LOGGER.info("calling get Google Books from controller");
+        return bookService.getGBBookList();
+    }
+    //     http://localhost:9092/api/gbbooks/{gbbookId}
+//    @GetMapping(path = "/gbbooks/{gbbookId}")
+//    public GBBook getGBBook(@PathVariable Long gBBookId) {
+//        LOGGER.info("calling getGBBBook method from controller");
+//        return bookService.getGBBook(gBBookId);
+//    }
+//    //      http://localhost:9092/api/books/1/gbbooks/{gbbookId}
+//    @PutMapping(path = "/books/{bookId}/gbbooks/{gBBookId}")
+//    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,
+//                               @PathVariable(value = "gBBookId") Long gBBookId,
+//                               @RequestBody GBBook gBBookObject){
+//        LOGGER.info("calling updateGBBook method from controller");
+//        return bookService.updateGBBook(bookId, gBBookId, gBBookObject);
+//    }
+    @DeleteMapping(path = "/gbbooks/{gBBookId}")
+    public String deleteGBBook(@PathVariable(value = "gBBookId") Long gBBookId){
+        LOGGER.info("calling deleteGBBook method from controller");
+        return bookService.deleteGBBook(gBBookId);
     }
 }
