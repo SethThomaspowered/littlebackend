@@ -3,9 +3,12 @@ package com.example.littlebackend.service;
 import com.example.littlebackend.exception.InformationExistsException;
 import com.example.littlebackend.exception.InformationNotFoundException;
 import com.example.littlebackend.model.Book;
+import com.example.littlebackend.model.Comment;
 import com.example.littlebackend.model.GBBook;
+import com.example.littlebackend.model.User;
 import com.example.littlebackend.repository.BookRepository;
 //import com.example.littlebackend.security.MyUserDetails;
+import com.example.littlebackend.repository.CommentRepository;
 import com.example.littlebackend.repository.GBBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,11 @@ public class BookService {
     public void setBookRepository(BookRepository bookRepository){ this.bookRepository=bookRepository; }
     @Autowired
     public void setGBBookRepository(GBBookRepository gBBookRepository){ this.gBBookRepository= gBBookRepository;}
+    private CommentRepository commentRepository;
+    @Autowired
+    public void setCommentRepository(CommentRepository commentRepository){
+        this.commentRepository=commentRepository;
+    }
     public Book addBook(@RequestBody Book bookObject){
         LOGGER.info("calling addBook from service");
 
@@ -131,5 +139,22 @@ public class BookService {
             bookRepository.deleteById(gBBookId);
             return "Book with id " + gBBookId + " has been successfully deleted";
         }
+    }
+
+    public Comment postComment(Long gBBookId, Comment commentObject){
+        LOGGER.info("service calling postComment");
+        GBBook book = gBBookRepository.findGBBookById(gBBookId);
+        if (book == null) {
+            throw new InformationNotFoundException(
+                    "Book with id " + gBBookId + " does not exist");
+        }
+
+        Comment comment = commentRepository.findCommentByComment(commentObject.getComment());
+        if (comment != null) {
+            throw new InformationExistsException("Comment with content " + comment.getComment() + " already exists");
+        }
+
+        commentObject.setGbBook(book);
+        return commentRepository.save(commentObject);
     }
 }

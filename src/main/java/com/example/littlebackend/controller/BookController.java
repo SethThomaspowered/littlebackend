@@ -1,6 +1,7 @@
 package com.example.littlebackend.controller;
 
 import com.example.littlebackend.model.Book;
+import com.example.littlebackend.model.Comment;
 import com.example.littlebackend.model.GBBook;
 import com.example.littlebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,10 @@ public class BookController {
     public String deleteGBBook(@PathVariable(value = "gBBookId") Long gBBookId){
         LOGGER.info("calling deleteGBBook method from controller");
         return bookService.deleteGBBook(gBBookId);
+    }
+    @PostMapping(path="/gbbooks/{gBBookId}/comments")
+    public Comment postComment(@PathVariable(value = "gBBookId") Long gBBookId, @RequestBody Comment commentObject){
+        LOGGER.info("calling postComment method from controller");
+        return bookService.postComment(gBBookId, commentObject);
     }
 }

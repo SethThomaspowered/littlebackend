@@ -1,8 +1,11 @@
 package com.example.littlebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -24,6 +27,9 @@ public class GBBook {
     private String author;
     @Column
     private String googleId;
+    @OneToMany(mappedBy = "comment", orphanRemoval=true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> commentList;
 
     public String getIsbn() {
         return isbn;
