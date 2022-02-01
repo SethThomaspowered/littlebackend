@@ -1,8 +1,11 @@
 package com.example.littlebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -21,6 +24,10 @@ public class User {
     @Column
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    @OneToMany(mappedBy = "comment", orphanRemoval=true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> commentList;
+
 
     public User(Long id, String username, String email, String password) {
         this.id = id;
