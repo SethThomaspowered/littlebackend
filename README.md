@@ -2,7 +2,7 @@
 
 This is where I will be using Java to build a Spring Boot application to support my frontend
 application [LittleFrontEnd](https://github.com/SethThomaspowered/littlefrontend). 
-
+Project has been deployed on Heroku at (LittleBackend)[https://littlebackend.herokuapp.com]
 ## Project Timeline
 
 ### Day 1
