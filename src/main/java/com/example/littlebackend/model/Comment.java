@@ -11,12 +11,11 @@ public class Comment {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length=99999)
+    @Column
     private String comment;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name= "user_id")
-    private User user;
+    @Column
+    private String name;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name= "book_id")
@@ -38,13 +37,13 @@ public class Comment {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public GBBook getGbBook() {
         return gbBook;
@@ -57,10 +56,18 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Long id, String comment, User user, GBBook gbBook) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Comment(Long id, String comment, GBBook gbBook) {
         this.id = id;
         this.comment = comment;
-        this.user = user;
+
         this.gbBook = gbBook;
     }
 }

@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path="/api/")
-//@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
     private BookService bookService;
     private static final Logger LOGGER = Logger.getLogger(BookController.class.getName());
@@ -66,12 +66,12 @@ public class BookController {
         LOGGER.info("calling get Google Books from controller");
         return bookService.getGBBookList();
     }
-    //     http://localhost:9092/api/gbbooks/{gbbookId}
-//    @GetMapping(path = "/gbbooks/{gbbookId}")
-//    public GBBook getGBBook(@PathVariable Long gBBookId) {
-//        LOGGER.info("calling getGBBBook method from controller");
-//        return bookService.getGBBook(gBBookId);
-//    }
+//         http://localhost:9092/api/gbbooks/{gbbookId}
+    @GetMapping(path = "/gbbooks/{gBBookId}")
+    public GBBook getGBBook(@PathVariable(value = "gBBookId") Long gBBookId) {
+        LOGGER.info("calling getGBBBook method from controller");
+        return bookService.getGBBook(gBBookId);
+    }
 //    //      http://localhost:9092/api/books/1/gbbooks/{gbbookId}
 //    @PutMapping(path = "/books/{bookId}/gbbooks/{gBBookId}")
 //    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,
@@ -90,4 +90,10 @@ public class BookController {
         LOGGER.info("calling postComment method from controller");
         return bookService.postComment(gBBookId, commentObject);
     }
+     @GetMapping(path="/gbbooks/1/comments")
+    public List<Comment> getComments(){
+        LOGGER.info("calling getComments method from controller");
+        return bookService.getComments();
+     }
+
 }

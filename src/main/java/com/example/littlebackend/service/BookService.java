@@ -106,11 +106,11 @@ public class BookService {
             return gbBooks;
         }
     }
-    public GBBook getGBBook(Long bookId) {
+    public GBBook getGBBook(Long gBBookId) {
 
-        GBBook book = gBBookRepository.findGBBookById(bookId);
+        GBBook book = gBBookRepository.findGBBookById(gBBookId);
         if (book == null) {
-            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+            throw new InformationNotFoundException("Book with id " + gBBookId + " not found");
         } else{
             return book;
         }
@@ -143,18 +143,19 @@ public class BookService {
 
     public Comment postComment(Long gBBookId, Comment commentObject){
         LOGGER.info("service calling postComment");
-        GBBook book = gBBookRepository.findGBBookById(gBBookId);
-        if (book == null) {
+        try {
+            Optional book = gBBookRepository.findById(gBBookId);
+            commentObject.setGbBook((GBBook) book.get());
+            return commentRepository.save(commentObject);
+        } catch (NoSuchElementException e) {
             throw new InformationNotFoundException(
                     "Book with id " + gBBookId + " does not exist");
         }
+    }
+    public List<Comment> getComments(){
+        LOGGER.info("service calling getComments");
+        List<Comment> comment= commentRepository.findAll();
+        return comment;
 
-        Comment comment = commentRepository.findCommentByComment(commentObject.getComment());
-        if (comment != null) {
-            throw new InformationExistsException("Comment with content " + comment.getComment() + " already exists");
-        }
-
-        commentObject.setGbBook(book);
-        return commentRepository.save(commentObject);
     }
 }
