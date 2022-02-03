@@ -115,21 +115,17 @@ public class BookService {
             return book;
         }
     }
-//    public GBBook updateGBBook(Long bookId, GBBook bookObject) {
-//        LOGGER.info("service calling updateBook ==>");
-//        GBBook book = gBBookRepository.findGBBookById(bookId);
-//        if (book == null) {
-//            throw new InformationNotFoundException("Book with id " + bookId + " not found");
-//        } else {
-//            if(bookObject.getTitle() != null){ book.setTitle(bookObject.getTitle());}
-//            if(bookObject.getDateAdded() != null) {
-//                book.setDateAdded(bookObject.getDateAdded());
-//            }
-//            if(bookObject.getGoogleId() != null){
-//                book.setGoogleBooksId(bookObject.getGoogleBooksId());}
-//            return gBBookRepository.save(gBBook);
-//        }
-//    }
+    public GBBook updateGBBook(Long bookId, GBBook bookObject) {
+        LOGGER.info("service calling updateBook ==>");
+        GBBook book = gBBookRepository.findGBBookById(bookId);
+        if (book == null) {
+            throw new InformationNotFoundException("Book with id " + bookId + " not found");
+        } else {
+            if(bookObject.getTitle() != null){ book.setTitle(bookObject.getTitle());}
+            if(bookObject.isCheckedOut()){book.setCheckedOut(bookObject.isCheckedOut());}
+            return gBBookRepository.save(book);
+        }
+    }
     public String deleteGBBook(Long gBBookId) {
         LOGGER.info("service calling deleteGBBook ==>");
         GBBook gBBook = gBBookRepository.findGBBookById(gBBookId);

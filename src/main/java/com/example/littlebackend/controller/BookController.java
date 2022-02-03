@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path="/api/")
-//@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
     private BookService bookService;
     private static final Logger LOGGER = Logger.getLogger(BookController.class.getName());
@@ -72,14 +72,13 @@ public class BookController {
         LOGGER.info("calling getGBBBook method from controller");
         return bookService.getGBBook(gBBookId);
     }
-//    //      http://localhost:9092/api/books/1/gbbooks/{gbbookId}
-//    @PutMapping(path = "/books/{bookId}/gbbooks/{gBBookId}")
-//    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,
-//                               @PathVariable(value = "gBBookId") Long gBBookId,
-//                               @RequestBody GBBook gBBookObject){
-//        LOGGER.info("calling updateGBBook method from controller");
-//        return bookService.updateGBBook(bookId, gBBookId, gBBookObject);
-//    }
+    //      http://localhost:9092/api/gbbooks/{gbbookId}
+    @PutMapping(path = "/gbbooks/{bookId}")
+    public GBBook updateGBBook(@PathVariable(value = "bookId") Long bookId,
+                               @RequestBody GBBook bookObject){
+        LOGGER.info("calling updateGBBook method from controller");
+        return bookService.updateGBBook(bookId, bookObject);
+    }
     @DeleteMapping(path = "/gbbooks/{gBBookId}")
     public String deleteGBBook(@PathVariable(value = "gBBookId") Long gBBookId){
         LOGGER.info("calling deleteGBBook method from controller");

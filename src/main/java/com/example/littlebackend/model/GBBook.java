@@ -28,6 +28,17 @@ public class GBBook {
     @Column
     private String googleId;
 
+    public Boolean isCheckedOut() {
+        return checkedOut;
+    }
+
+    public void setCheckedOut(Boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
+    @Column
+    private Boolean checkedOut;
+
 
 
     public String getIsbn() {
