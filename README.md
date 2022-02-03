@@ -115,6 +115,8 @@ Request Type | Action | Url | Request Body |
 
 ## Hurdles
 - Handling Cross-Origin Resource Sharing errors
+  - In order to get my frontend to talk with my backend I learned that CrossOrigin annotation which I added to my BookController to authorize my frontend to communicate with my backend.
+ 
 - Deployment 
   - For Heroku, I discovered that I needed to scale back from usingJava 11 to Java 1.8. I fixed this issue by adding the following code to my pom.xml.
   ``` 
@@ -123,4 +125,8 @@ Request Type | Action | Url | Request Body |
          <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
          <java.version>1.8</java.version>
      </properties>
+  ```
+  - I also learned that I needed to set my server port in my application.properties.
+  ```
+  server.port=${PORT:8080}
   ```
