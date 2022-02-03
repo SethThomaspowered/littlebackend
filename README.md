@@ -37,6 +37,22 @@ Project has been deployed on Heroku at (LittleBackend)[https://littlebackend.her
 <img width="412" alt="image" src="https://user-images.githubusercontent.com/83875269/152061136-33ec5487-0153-4ab6-93ca-13e466c12a85.png">
 
 ## REST API Endpoints
+Request Type | Action | Url | Request Body |
+|:-----:|:---:|:-----:|:----:|
+| Get | Retrieve all Books | api/books | None |
+| Get | Retrieve one Book | api/books/{bookId} | BookId |
+| Post | Add a new book | api/books | BookObject |
+| Put | Update a book | api/books/{bookId} | BookId BookObject |
+| Delete | Delete a book | api/books/{bookId} | BookId |
+| Get | Retrieve all GBBooks | api/gbbooks | None |
+| Get | Retrieve one GBBook | api/gbbooks/{gBBookId} | GBBookId |
+| Post | Add a new GBBook | api/gbbooks | GBBookObject |
+| Put | Update a GBBook | api/gbbooks/{gBBookId} | GBBBookId GBBookObject |
+| Delete | Delete a GBBook | api/gbbooks/{gBBookId} | GBBookId |
+| Get | Retrieve all comments | api/gbbooks/{gBBbookId}/comments | GBBookID |
+| Post | Add a new comment | api/gbbooks/{gBBookId}/comments |GBBookId commentObject |
+| Put | Update a comment | api/gbbooks/{gBBookId}/comments/{commentId} | GBBBookId commentId commentObject |
+| Delete | Delete a comment | api/gbbooks/{gBBookId}/comments/{commentId} | GBBookId |
 
 ## POM Dependencies
 - spring-boot-starter-data-rest
@@ -69,6 +85,7 @@ Project has been deployed on Heroku at (LittleBackend)[https://littlebackend.her
 
 
 ### Day 5
+-  Added Comment model
 
 ## Hurdles
 
