@@ -1,10 +1,27 @@
 # Little Library Back End Development
-
+One of the challenges that first got me interested in learning to code was, seeing Little Libraries around the .
 This is where I will be using Java to build a Spring Boot application to support my frontend
 application [LittleFrontEnd](https://github.com/SethThomaspowered/littlefrontend). 
 Project has been deployed on Heroku at (LittleBackend)[https://littlebackend.herokuapp.com]
 
 ## User Stories
+### MVP
+A visitor to the website:
+  - See the most recent additions to library.
+  - Click on books to get more details.
+  
+
+A library steward should be available to: 
+  - Add books to a database
+  - Update status of book availability 
+   
+ ### Bonus
+ - Add log in functionality
+ - Allow visitors to search for a book, by title, author, or genre
+  - If book is not found offer recommendations on where to find
+ - Add additional libraries
+ - Access API for additional book details
+ - Leave a comment (added feature)
 
 ## ERD
 
@@ -47,12 +64,14 @@ Request Type | Action | Url | Request Body |
 | Get | Retrieve all GBBooks | api/gbbooks | None |
 | Get | Retrieve one GBBook | api/gbbooks/{gBBookId} | GBBookId |
 | Post | Add a new GBBook | api/gbbooks | GBBookObject |
-| Put | Update a GBBook | api/gbbooks/{gBBookId} | GBBBookId GBBookObject |
+| Put | Checkout a book | api/gbbooks/{gBBookId} | GBBBookId GBBookObject |
 | Delete | Delete a GBBook | api/gbbooks/{gBBookId} | GBBookId |
 | Get | Retrieve all comments | api/gbbooks/{gBBbookId}/comments | GBBookID |
 | Post | Add a new comment | api/gbbooks/{gBBookId}/comments |GBBookId commentObject |
 | Put | Update a comment | api/gbbooks/{gBBookId}/comments/{commentId} | GBBBookId commentId commentObject |
 | Delete | Delete a comment | api/gbbooks/{gBBookId}/comments/{commentId} | GBBookId |
+| Post | Create new user | auth/users/register | UserObject | (for future use)
+| Post | Login existing user | auth/users/login | UserObject | (for future use)
 
 ## POM Dependencies
 - spring-boot-starter-data-rest
@@ -64,7 +83,13 @@ Request Type | Action | Url | Request Body |
 - heroku-deploy
 - junit
 ## System Tools Used
-
+- IntelliJ Idea
+- Spring Boot
+- Maven
+- Junit
+- Postgres
+- Postman
+- Heroku
 ## Project Timeline
 
 ### Day 1
@@ -86,6 +111,8 @@ Request Type | Action | Url | Request Body |
 
 ### Day 5
 -  Added Comment model
+-  Added Checkout to GBBook model
 
 ## Hurdles
-
+- Handling Cross-Origin Resource Sharing errors
+- Deployment 
