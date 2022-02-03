@@ -116,3 +116,9 @@ Request Type | Action | Url | Request Body |
 ## Hurdles
 - Handling Cross-Origin Resource Sharing errors
 - Deployment 
+- For Heroku, I discovered that I needed to scale back from usingJava 11 to Java 1.8. I fixed this issue by adding the following code to my pom.xml.
+  ``  <properties>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+         <java.version>1.8</java.version>
+     </properties> ``
