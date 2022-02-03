@@ -16,7 +16,7 @@ public class Comment {
     @Column
     private String name;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name= "book_id")
     private GBBook gbBook;
