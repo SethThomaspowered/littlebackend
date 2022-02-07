@@ -99,4 +99,9 @@ public class BookController {
         LOGGER.info("calling addLibrary method from controller");
         return bookService.addLibrary(libraryObject);
     }
+    @GetMapping(path = "/library")
+    public List<Library> getLibraries(){
+        LOGGER.info("calling getLibraries method from controller");
+        return bookService.getLibraries();
+    }
 }
