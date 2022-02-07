@@ -94,5 +94,9 @@ public class BookController {
         LOGGER.info("calling getComments method from controller");
         return bookService.getComments();
      }
-
+    @PostMapping("/library")
+    public Library addLibrary(Library libraryObject){
+        LOGGER.info("calling addLibrary method from controller");
+        return bookService.addLibrary(libraryObject);
+    }
 }
