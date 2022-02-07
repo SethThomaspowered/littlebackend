@@ -3,6 +3,7 @@ package com.example.littlebackend.controller;
 import com.example.littlebackend.model.Book;
 import com.example.littlebackend.model.Comment;
 import com.example.littlebackend.model.GBBook;
+import com.example.littlebackend.model.Library;
 import com.example.littlebackend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

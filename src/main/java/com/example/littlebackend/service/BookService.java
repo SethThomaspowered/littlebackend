@@ -2,14 +2,12 @@ package com.example.littlebackend.service;
 
 import com.example.littlebackend.exception.InformationExistsException;
 import com.example.littlebackend.exception.InformationNotFoundException;
-import com.example.littlebackend.model.Book;
-import com.example.littlebackend.model.Comment;
-import com.example.littlebackend.model.GBBook;
-import com.example.littlebackend.model.User;
+import com.example.littlebackend.model.*;
 import com.example.littlebackend.repository.BookRepository;
 //import com.example.littlebackend.security.MyUserDetails;
 import com.example.littlebackend.repository.CommentRepository;
 import com.example.littlebackend.repository.GBBookRepository;
+import com.example.littlebackend.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +21,7 @@ import java.util.logging.Logger;
 public class BookService {
     private BookRepository bookRepository;
     private GBBookRepository gBBookRepository;
+    private LibraryRepository libraryRepository;
     private static final Logger LOGGER=Logger.getLogger(BookService.class.getName());
     @Autowired
     public void setBookRepository(BookRepository bookRepository){ this.bookRepository=bookRepository; }
@@ -33,6 +32,8 @@ public class BookService {
     public void setCommentRepository(CommentRepository commentRepository){
         this.commentRepository=commentRepository;
     }
+    @Autowired
+    public void setLibraryRepository(LibraryRepository libraryRepository){ this.libraryRepository=libraryRepository;}
     public Book addBook(@RequestBody Book bookObject){
         LOGGER.info("calling addBook from service");
 
@@ -153,5 +154,24 @@ public class BookService {
         List<Comment> comment= commentRepository.findAll();
         return comment;
 
+    }
+    public Library addLibrary(Library libraryObject) {
+        LOGGER.info("service calling addLibrary ==>");
+        Library library = libraryRepository.findLibraryByStreet(libraryObject.getStreet());
+        if (library != null) {
+            throw new InformationExistsException("Library with address " + library.getStreet() + " already exists");
+        }
+
+        return libraryRepository.save(libraryObject);
+    }
+
+    public List<Library> getLibraries(){
+        LOGGER.info("calling getLibraries method from service");
+        List<Library> libraries = libraryRepository.findAll();
+        if(libraries.isEmpty()){
+            throw new InformationNotFoundException("No libraries were found");
+        } else{
+            return libraries;
+        }
     }
 }
