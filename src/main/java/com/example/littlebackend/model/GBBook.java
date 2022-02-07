@@ -38,8 +38,20 @@ public class GBBook {
 
     @Column
     private Boolean checkedOut;
+    @Column
+    private Long libraryId;
 
+    public Boolean getCheckedOut() {
+        return checkedOut;
+    }
 
+    public Long getLibraryId() {
+        return libraryId;
+    }
+
+    public void setLibraryId(Long libraryId) {
+        this.libraryId = libraryId;
+    }
 
     public String getIsbn() {
         return isbn;
