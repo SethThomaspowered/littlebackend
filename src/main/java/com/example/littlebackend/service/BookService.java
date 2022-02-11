@@ -124,6 +124,7 @@ public class BookService {
         } else {
             if(bookObject.getTitle() != null){ book.setTitle(bookObject.getTitle());}
             if(bookObject.isCheckedOut()){book.setCheckedOut(bookObject.isCheckedOut());}
+            if (bookObject.getLibraryId() != null){ book.setLibraryId(bookObject.getLibraryId());}
             return gBBookRepository.save(book);
         }
     }

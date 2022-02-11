@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path="/api/")
-@CrossOrigin(origins = "https://liddleoxfordlibrary.herokuapp.com")
+@CrossOrigin
 //@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
     private BookService bookService;

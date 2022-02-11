@@ -27,7 +27,7 @@ public class BookControllerTest extends AbstractTest{
         Book[] BookList= super.mapFromJson(content, Book[].class);
         assertTrue(BookList.length>0);
     }
-//    @Test
+//   [ @Test
 //    public void addBook() throws Exception {
 //        String uri = "/books";
 //        Book book = new Book();
@@ -43,7 +43,7 @@ public class BookControllerTest extends AbstractTest{
 //        assertEquals(201, status);
 //        String content = mvcResult.getResponse().getContentAsString();
 //        assertEquals(content, "Book is added successfully");
-//    }
+//    }]
 //    @Test
 //    public void updateBook() throws Exception {
 //        String uri = "/api/books/2";
