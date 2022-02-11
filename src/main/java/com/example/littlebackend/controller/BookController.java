@@ -105,4 +105,9 @@ public class BookController {
         LOGGER.info("calling getLibraries method from controller");
         return bookService.getLibraries();
     }
+    @GetMapping(path="/library/{libraryId}")
+    public Library getLibrary(@PathVariable(name="libraryId") Long libraryId){
+        LOGGER.info("calling getLibrary method from controller");
+        return bookService.getLibrary(libraryId);
+    }
 }

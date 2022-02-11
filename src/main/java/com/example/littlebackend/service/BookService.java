@@ -73,6 +73,7 @@ public class BookService {
             if(bookObject.getDateAdded() != null) {
                 book.setDateAdded(bookObject.getDateAdded());
             }
+            if(bookObject.isAvailable() != null){book.setAvailable(bookObject.isAvailable());}
             if(bookObject.getGoogleBooksId() != null){
                 book.setGoogleBooksId(bookObject.getGoogleBooksId());}
             return bookRepository.save(book);
@@ -173,6 +174,15 @@ public class BookService {
             throw new InformationNotFoundException("No libraries were found");
         } else{
             return libraries;
+        }
+    }
+    public Library getLibrary(Long libraryId){
+        LOGGER.info("calling getLibrary method from service");
+        Library library = libraryRepository.findLibraryById(libraryId);
+        if (library == null) {
+            throw new InformationNotFoundException("Library with id " + libraryId + " not found");
+        } else{
+            return library;
         }
     }
 }

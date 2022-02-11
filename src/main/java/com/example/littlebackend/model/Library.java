@@ -3,7 +3,7 @@ package com.example.littlebackend.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="tables")
+@Table(name="libraries")
 public class Library {
     @Id
     @Column
