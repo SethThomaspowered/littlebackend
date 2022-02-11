@@ -20,10 +20,29 @@ public class Book {
     @Column
     private Date dateAdded;
     @Column
-    private boolean IsAvailable;
+    private Boolean IsAvailable;
     @Column
     private String googleBooksId;
+    @Column
+    private Long libraryId;
+    @Column
+    private String address;
 
+    public Long getLibraryId() {
+        return libraryId;
+    }
+
+    public void setLibraryId(Long libraryId) {
+        this.libraryId = libraryId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name="googleBook_id", referencedColumnName = "id")
 //    private GBBook gBBook;
@@ -82,11 +101,11 @@ public class Book {
         this.dateAdded = dateAdded;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return IsAvailable;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(Boolean available) {
         IsAvailable = available;
     }
 
