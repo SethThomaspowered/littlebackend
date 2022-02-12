@@ -110,4 +110,9 @@ public class BookController {
         LOGGER.info("calling getLibrary method from controller");
         return bookService.getLibrary(libraryId);
     }
+    @PutMapping(path = "/library/{libraryId}")
+    public Library updateLibrary(@PathVariable(name = "libraryId") Long libraryId, @RequestBody Library libraryObject){
+        LOGGER.info("calling updateLibrary method from controller");
+        return bookService.updateLibrary(libraryId, libraryObject);
+    }
 }

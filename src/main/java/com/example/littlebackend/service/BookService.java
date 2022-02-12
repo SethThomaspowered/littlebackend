@@ -183,4 +183,18 @@ public class BookService {
             return library;
         }
     }
+    public Library updateLibrary(Long libraryId, @RequestBody Library libraryObject) {
+        LOGGER.info("service calling updateLibrary ==>");
+        Library library = libraryRepository.findLibraryById(libraryId);
+        if (library == null) {
+            throw new InformationNotFoundException("Library with id " + libraryId + " not found");
+        } else {
+            if(libraryObject.getName() != null){ library.setName(libraryObject.getName());}
+            if(libraryObject.getStreet() != null){library.setStreet(libraryObject.getStreet());}
+            if (libraryObject.getCity() != null){ library.setCity(libraryObject.getCity());}
+            if (libraryObject.getState() != null){library.setState(libraryObject.getState());}
+            if (libraryObject.getZipCode() != null){library.setZipCode(libraryObject.getZipCode());}
+            return libraryRepository.save(library);
+        }
+    }
 }
