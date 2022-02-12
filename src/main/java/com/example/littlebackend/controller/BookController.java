@@ -95,17 +95,17 @@ public class BookController {
         LOGGER.info("calling getComments method from controller");
         return bookService.getComments();
      }
-    @PostMapping("/libraries")
-    public Library addLibrary(Library libraryObject){
+    @PostMapping("/library")
+    public Library addLibrary(@RequestBody Library libraryObject){
         LOGGER.info("calling addLibrary method from controller");
         return bookService.addLibrary(libraryObject);
     }
-    @GetMapping(path = "/libraries")
+    @GetMapping(path = "/library")
     public List<Library> getLibraries(){
         LOGGER.info("calling getLibraries method from controller");
         return bookService.getLibraries();
     }
-    @GetMapping(path="/libraries/{libraryId}")
+    @GetMapping(path="/library/{libraryId}")
     public Library getLibrary(@PathVariable(name="libraryId") Long libraryId){
         LOGGER.info("calling getLibrary method from controller");
         return bookService.getLibrary(libraryId);

@@ -157,7 +157,7 @@ public class BookService {
         return comment;
 
     }
-    public Library addLibrary(Library libraryObject) {
+    public Library addLibrary(@RequestBody Library libraryObject) {
         LOGGER.info("service calling addLibrary ==>");
         Library library = libraryRepository.findLibraryByName(libraryObject.getName());
 
