@@ -160,9 +160,7 @@ public class BookService {
     public Library addLibrary(Library libraryObject) {
         LOGGER.info("service calling addLibrary ==>");
         Library library = libraryRepository.findLibraryByName(libraryObject.getName());
-        if (library != null) {
-            throw new InformationExistsException("Library with address " + library.getStreet() + " already exists");
-        }
+
 
         return libraryRepository.save(libraryObject);
     }
