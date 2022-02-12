@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface LibraryRepository extends JpaRepository<Library, Long> {
     Library findLibraryByStreet(String street);
     Library findLibraryById(Long libraryId);
+    Library findLibraryByName(String name);
 }

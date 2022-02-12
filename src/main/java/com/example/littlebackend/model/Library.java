@@ -69,8 +69,7 @@ public class Library {
         this.zipCode = zipCode;
     }
 
-    public Library(Long id, String name, String street, String city, String state, String zipCode) {
-        this.id = id;
+    public Library( String name, String street, String city, String state, String zipCode) {
         this.name = name;
         this.street = street;
         this.city = city;
